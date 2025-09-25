@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Test coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Tessl temporary files
+.tessl/tmp/
+tessl.log

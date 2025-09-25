@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+export PATH="/Users/nickrowlands/.local/bin:$PATH"
+uv run python src/llm_prompt.py "$@"
