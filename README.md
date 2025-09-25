@@ -64,6 +64,9 @@ uv add langchain google-generativeai click pydantic python-dotenv jinja2
 
 # Install in development mode
 uv add --dev pytest black flake8 mypy
+
+# Make the llm-prompt script executable
+chmod +x llm-prompt
 ```
 
 ### Option 2: Using pip
@@ -81,6 +84,9 @@ pip install -r requirements.txt
 
 # Install in development mode
 pip install -e .
+
+# Make the llm-prompt script executable
+chmod +x llm-prompt
 ```
 
 ## Examples
