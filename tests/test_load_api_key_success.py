@@ -1,18 +1,17 @@
 # GENERATED FROM SPEC - DO NOT EDIT
 # @generated with Tessl v0.23.0 from ../specs/llm-prompt.spec.md
-# (spec:b0bb74ef) (code:0821d3ee)
+# (spec:06252042) (code:e0269c75)
 
 import os
-import tempfile
+import sys
 import pytest
 from unittest.mock import patch
-from src.llm_prompt import load_api_key
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+import llm_prompt
 
 def test_load_api_key_success():
-    """Test that load_api_key returns the API key when GOOGLE_API_KEY is set in .env"""
-    # Mock os.getenv to return the test API key
-    with patch.dict(os.environ, {'GOOGLE_API_KEY': 'test_api_key_123'}):
-        with patch('src.llm_prompt.load_dotenv'):
-            result = load_api_key()
+    with patch.object(llm_prompt, 'load_dotenv'):
+        with patch.dict(os.environ, {'GOOGLE_API_KEY': 'test_api_key_123'}):
+            result = llm_prompt.load_api_key()
             assert result == 'test_api_key_123'

@@ -15,6 +15,7 @@ Tool accepts a single text prompt as a command-line argument and processes it.
 - Valid usage: `llm-prompt "Hello world"` prints the LLM response and completes normally [@test](../tests/test_llm_prompt_main_success.py)
 - No arguments provided: prints usage error message and exits with non-zero code [@test](../tests/test_llm_prompt_no_args.py)
 - More than one argument provided: prints usage error message and exits with non-zero code [@test](../tests/test_llm_prompt_too_many_args.py)
+- Empty prompt provided: handles empty string prompt and processes normally [@test](../tests/test_llm_prompt_empty_prompt.py)
 
 ### Load configuration
 
@@ -29,12 +30,15 @@ Loads the model name from environment variables with fallback to default.
 
 - Returns "gemini-1.5-pro" when `DEFAULT_MODEL` is not set in environment [@test](../tests/test_load_model_default.py)
 - Returns custom model when `DEFAULT_MODEL` is set in environment [@test](../tests/test_load_model_custom.py)
+- Handles empty string in `DEFAULT_MODEL` by falling back to default [@test](../tests/test_load_model_empty_string.py)
 
 ### Send prompt to Gemini LLM
 
 Sends the provided prompt to the specified Gemini model using LangChain and returns the response.
 
-- Mocked Gemini returns `"mocked response"`: prints `"mocked response"` and completes normally [@test](../tests/test_send_prompt_success.py)
+- Creates ChatGoogleGenerativeAI instance with correct model and API key, returns response content [@test](../tests/test_send_prompt_integration.py)
+- Handles LangChain API exceptions by re-raising them [@test](../tests/test_send_prompt_langchain_error.py)
+- Processes empty prompt through LangChain correctly [@test](../tests/test_send_prompt_empty_input.py)
 
 ### Error handling
 
@@ -42,6 +46,7 @@ Provides basic error handling for common failure cases.
 
 - Missing API key at runtime: prints error message containing "API key" and exits with non-zero code [@test](../tests/test_llm_prompt_missing_api_key.py)
 - Gemini API call raises an exception: prints the exception message and exits with non-zero code [@test](../tests/test_llm_prompt_api_failure.py)
+- Network timeout or connection errors: prints appropriate error and exits with non-zero code [@test](../tests/test_llm_prompt_network_failure.py)
 
 ## API
 

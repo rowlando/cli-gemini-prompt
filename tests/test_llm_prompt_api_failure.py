@@ -1,6 +1,6 @@
 # GENERATED FROM SPEC - DO NOT EDIT
 # @generated with Tessl v0.23.0 from ../specs/llm-prompt.spec.md
-# (spec:b0bb74ef) (code:1c0402e7)
+# (spec:06252042) (code:606c108d)
 
 import os
 import sys
@@ -20,8 +20,10 @@ def test_llm_prompt_api_failure(monkeypatch, capsys):
     def fake_send(prompt, api_key, model):
         raise Exception("Gemini API error")
     monkeypatch.setattr(llm_prompt, "send_prompt_to_gemini", fake_send)
+    
     with pytest.raises(SystemExit) as excinfo:
         llm_prompt.main()
+    
     assert excinfo.value.code != 0
     captured = capsys.readouterr()
     output = captured.out + captured.err
